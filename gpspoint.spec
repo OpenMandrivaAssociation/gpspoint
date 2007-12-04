@@ -1,6 +1,6 @@
 %define name	gpspoint
 %define version	2.030521
-%define release 4mdk
+%define release  %mkrel 4
 
 %define major	1
 %define libname %mklibname %name %major
