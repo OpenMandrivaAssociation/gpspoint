@@ -14,7 +14,6 @@ Source:		%{name}-%{version}.tar.bz2
 URL:		http://gpspoint.dnsalias.net/gpspoint2/
 License:	GPL
 Group:		Communications
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 With gpspoint you can interact with a garmin gps device. Most importantly you
