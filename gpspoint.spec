@@ -53,14 +53,15 @@ rm -rf $RPM_BUILD_ROOT
 %makeinstall
 
 #menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): command="m%{name}" \
-icon="more_applications_other_section.png" \
-needs="text" \
-title="MGPSPoint" \
-longtitle="GPS Data Transfer" \
-section="More applications/Other"
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications/
+cat << EOF > %buildroot%{_datadir}/applications/mandriva-%{name}.desktop
+[Desktop Entry]
+Type=Application
+Exec=m%{name}
+Icon=more_applications_other_section
+Name=MGPSPoint
+Comment=GPS Data Transfer
+Categories=Utility;
 EOF
 
 %clean
@@ -81,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%name
 %{_bindir}/m%name
 %{_mandir}/man1/*
-%{_menudir}/%name
+%{_datadir}/applications/mandriva-%name.desktop
 
 %files -n %{libname}
 %defattr(-,root,root)
