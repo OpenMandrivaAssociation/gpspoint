@@ -1,6 +1,3 @@
-%define _disable_ld_as_needed		1
-%define _disable_ld_no_undefined	1
-
 %define major		1
 %define libname		%mklibname %{name} %major
 %define develname	%mklibname %{name} -d
@@ -18,6 +15,7 @@ Patch3:		gpspoint-2.030521-netbsd-patch-ae
 Patch4:		gpspoint-2.030521-netbsd-patch-af
 # GCC 4.3 build fixes, by me - AdamW 2008/08
 Patch5:		gpspoint-2.030521-gcc43.patch
+Patch6:		gpspoint-2.030521-link.patch
 License:	GPLv2+
 Group:		Communications
 BuildRoot:	%{_tmppath}/%{name}-buildroot
@@ -54,14 +52,16 @@ Development libraries and headers for developing programs based on
 %patch3 -p0
 %patch4 -p0
 %patch5 -p1 -b .gcc43
+%patch6 -p0 -b .link
 
 %build
+autoreconf -fi
 %configure2_5x
-%make
+make
 										
 %install
 rm -rf %{buildroot}
-%makeinstall
+%makeinstall_std
 
 #menu
 mkdir -p %{buildroot}%{_datadir}/applications/
