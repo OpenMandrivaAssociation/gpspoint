@@ -1,0 +1,20 @@
+--- src/Makefile.am.link	2003-05-21 10:37:15.000000000 +0200
++++ src/Makefile.am	2010-02-19 17:25:20.000000000 +0100
+@@ -8,6 +8,7 @@
+ 
+ lib_LTLIBRARIES =libgpspoint2.la
+ libgpspoint2_la_LDFLAGS= -version-info 1:0:0
++libgpspoint2_la_LIBADD = -lstdc++ -lm
+ INCLUDES = -I$(includedir)
+ 
+ libgpspoint2_la_SOURCES=	\
+@@ -47,6 +48,8 @@
+ 
+ 
+ bin_PROGRAMS = gpspoint
+-LDADD =  -lgpspoint2
+ gpspoint_SOURCES = main.cpp
++gpspoint_LDADD = $(top_builddir)/src/libgpspoint2.la
+ MAINTAINERCLEANFILES = Makefile.in  config.h.in config.h stamp-h.in stamp-h doc
++
++all-am: $(lib_LTLIBRARIES) $(bin_PROGRAMS)

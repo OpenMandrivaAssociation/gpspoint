@@ -1,0 +1,30 @@
+--- gpspoint-2.030521/src/posixserial.cpp	2003-04-14 09:23:33.000000000 -0700
++++ gpspoint-2.030521/src/posixserial.cpp.new	2008-08-22 18:18:17.000000000 -0700
+@@ -15,6 +15,7 @@
+ //Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
+ 
+ #include "posixserial.h"
++#include <string.h>
+ 
+ #ifdef HAVE_TERMIOS_H
+ 
+--- gpspoint-2.030521/src/main.cpp	2003-05-21 00:44:33.000000000 -0700
++++ gpspoint-2.030521/src/main.cpp.new	2008-08-22 18:40:06.000000000 -0700
+@@ -22,6 +22,7 @@
+ #include "date_time_type.h"
+ 
+ #include <string>
++#include <stdlib.h>
+ #include <fstream>
+ #include <signal.h>
+ 
+--- gpspoint-2.030521/src/io.cpp.gcc	2010-02-19 17:06:15.000000000 +0100
++++ gpspoint-2.030521/src/io.cpp	2010-02-19 17:06:27.000000000 +0100
+@@ -14,6 +14,7 @@
+ //along with this program; if not, write to the Free Software
+ //Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. 
+ 
++#include <cstdio>
+ #include "io.h"
+ 
+ 
