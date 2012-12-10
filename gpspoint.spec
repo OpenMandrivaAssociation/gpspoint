@@ -5,7 +5,7 @@
 Name: 	 	gpspoint
 Summary: 	Garmin GPS data transfer utility
 Version: 	2.030521
-Release: 	%{mkrel 7}
+Release: 	7
 Source0:	%{name}-%{version}.tar.bz2
 # These patches are build fixes, from NetBSD - AdamW 2008/08
 Patch0:		gpspoint-2.030521-netbsd-patch-ab
@@ -18,7 +18,6 @@ Patch5:		gpspoint-2.030521-gcc43.patch
 Patch6:		gpspoint-2.030521-link.patch
 License:	GPLv2+
 Group:		Communications
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 With gpspoint you can interact with a Garmin GPS device. Most
@@ -56,7 +55,7 @@ Development libraries and headers for developing programs based on
 
 %build
 autoreconf -fi
-%configure2_5x
+%configure2_5x --disable-static
 make
 										
 %install
@@ -75,26 +74,6 @@ Comment=GPS Data Transfer
 Categories=Utility;
 EOF
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-		
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files
 %defattr(-,root,root)
 %doc README AUTHORS ChangeLog COPYRIGHT NEWS TODO
@@ -111,6 +90,51 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_includedir}/gpspoint2
 %{_libdir}/*.so
-%{_libdir}/*.a
-%{_libdir}/*.la
 
+
+
+%changelog
+* Fri Feb 19 2010 Funda Wang <fwang@mandriva.org> 2.030521-7mdv2010.1
++ Revision: 508369
+- fix linkage
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Sat Aug 23 2008 Adam Williamson <awilliamson@mandriva.org> 2.030521-6mdv2009.0
++ Revision: 275285
+- package COPYRIGHT not COPYING
+- protect major in file list (not like it's ever going to increment...heh)
+- add gcc43.patch: fix build with GCC 4.3
+- add netbsd-patch-ab through netbsd-patch-af: from NetBSD, build fixes
+- new devel policy
+- new license policy
+- spec clean
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - auto convert menu to XDG
+    - kill re-definition of %%buildroot on Pixel's request
+    - use %%mkrel
+    - import gpspoint
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+
+* Sat Jun 5 2004 Austin Acton <austin@mandrake.org> 2.030521-4mdk
+- new menu
+- configure 2.5
+
+* Fri Feb 20 2004 David Baudens <baudens@mandrakesoft.com> 2.030521-3mdk
+- Fix menu
+
+* Tue Jul 15 2003 Austin Acton <aacton@yorku.ca> 2.030521-2mdk
+- rebuild for rpm
+
+* Fri May 23 2003 Austin Acton <aacton@yorku.ca> 2.030521-1mdk
+- initial package
