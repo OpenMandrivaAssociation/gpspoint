@@ -5,7 +5,7 @@
 Name: 	 	gpspoint
 Summary: 	Garmin GPS data transfer utility
 Version: 	2.030521
-Release: 	7
+Release: 	8
 Source0:	%{name}-%{version}.tar.bz2
 # These patches are build fixes, from NetBSD - AdamW 2008/08
 Patch0:		gpspoint-2.030521-netbsd-patch-ab
