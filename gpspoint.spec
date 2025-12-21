@@ -19,6 +19,11 @@ Patch6:		gpspoint-2.030521-link.patch
 License:	GPLv2+
 Group:		Communications
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 With gpspoint you can interact with a Garmin GPS device. Most
 importantly you can download and upload waypoints, routes and tracks.
